@@ -1,0 +1,10 @@
+{
+  "name": "srii-arts",
+  "version": "1.0.0",
+  "description": "SRII ARTS - AI-Native Desktop NLE Studio Director for CapCut Desktop",
+  "scripts": {
+    "dev:backend": "python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build"
+  }
+}

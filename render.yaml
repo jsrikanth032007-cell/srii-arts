@@ -1,0 +1,42 @@
+services:
+  # =========================================================================
+  # SRII ARTS Backend API (Python Web Service)
+  # =========================================================================
+  - type: web
+    name: srii-arts-backend
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/settings
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.11
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        value: "*"
+
+  # =========================================================================
+  # SRII ARTS Frontend (Static Site on Render)
+  # =========================================================================
+  - type: web
+    name: srii-arts-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: srii-arts-backend
+          property: host

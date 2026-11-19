@@ -1,0 +1,35 @@
+# Environment & credentials
+.env
+.env.*
+!.env.example
+.vercel
+
+# Node
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Python
+__pycache__/
+backend/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Large generated / proxy media files (re-created dynamically on demand)
+backend/proxies/*.mp4
+backend/generated_assets/*.jpg
+backend/sample_drafts/*/*.mp4
+!backend/sample_drafts/**/draft_content.json
+!backend/sample_drafts/**/draft_meta_info.json
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
